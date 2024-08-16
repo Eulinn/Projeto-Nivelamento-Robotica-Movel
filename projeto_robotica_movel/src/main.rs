@@ -87,20 +87,23 @@ fn main() {
 
     
     // Declarando Carteiro
-    println!("Digite as coordenadas do carteiro.");
-    let aux = le_terminal();
-    let mut carteiro = Carteiro::new(aux[0], aux[1]);
+    // println!("Digite as coordenadas do carteiro.");
+    // let aux = le_terminal();
+    // let mut carteiro = Carteiro::new(aux[0], aux[1]);
+    let mut carteiro = Carteiro::new(1,1);
 
     // Declarando Caixa
-    println!("Digite as coordenadas da caixa.");
-    let aux = le_terminal();
-    let mut caixa = Caixa::new(aux[0], aux[1]);
+    // println!("Digite as coordenadas da caixa.");
+    // let aux = le_terminal();
+    // let mut caixa = Caixa::new(aux[0], aux[1]);
+    let mut caixa = Caixa::new(9,9);
 
     // Coletando coordenadas do destino
-    println!("Digite as coordenadas do destino.");
-    let aux = le_terminal();
+    // println!("Digite as coordenadas do destino.");
+    // let aux = le_terminal();
 
     // Inicializa jogo
-    let mut jogo = Jogo::new(carteiro, caixa, matriz, aux[0], aux[1]);
+    // let mut jogo = Jogo::new(carteiro, caixa, matriz, aux[0], aux[1]);
+    let mut jogo = Jogo::new(carteiro, caixa, matriz, 15,15);
     jogo.joga();
 }
