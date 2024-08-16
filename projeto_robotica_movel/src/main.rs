@@ -11,6 +11,7 @@ mod pid;
 mod jogo;
 mod carteiro;
 mod caixa;
+mod astar;
 
 //  JOGO DA ENTREGA
 //

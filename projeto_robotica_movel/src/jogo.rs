@@ -1,8 +1,8 @@
+use crate::astar::Astar;
 use crate::caixa::Caixa;
 use crate::carteiro::{Carteiro, Direcao, Status};
 use std::process::exit;
 use std::process::Command;
-
 
 pub struct Jogo {
     carteiro: Carteiro,
@@ -12,6 +12,7 @@ pub struct Jogo {
     ult_pos_y: i32,
     destino_x: i32,
     destino_y: i32,
+    astar_logic: Astar,
 }
 
 impl Jogo {
@@ -31,6 +32,7 @@ impl Jogo {
             ult_pos_y: 0,
             destino_x: x,
             destino_y: y,
+            astar_logic: Astar::new(),
         }
     }
 
@@ -74,6 +76,15 @@ impl Jogo {
             // panic!(); // A boa prática do rust não me manda usar Panic para encerrar com erro?
             std::process::exit(0);
         }
+
+        let nova_direcao = self.astar_logic.verifica_rota(
+            (self.carteiro.get_pos_x(), self.carteiro.get_pos_y()),
+            (self.destino_x, self.destino_y),
+        );
+
+        println!("O escolhido é: {:?}", nova_direcao);
+
+        
 
         // Atualiza local do carteiro e
         for (i_usize, row) in self.mapa.iter_mut().enumerate() {
@@ -151,7 +162,6 @@ impl Jogo {
             }
         }
     }
-
 
     pub fn joga(&mut self) {
         self.limpa_terminal();
