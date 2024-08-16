@@ -23,4 +23,12 @@ impl Sensor {
     pub fn get_roll(&self) -> f64 {
         self.roll
     }
+
+    pub fn corr_pitch(&mut self, pitch_new: f64) {
+        self.pitch += pitch_new;
+    }
+
+    pub fn corr_roll(&mut self, roll_new: f64) {
+        self.roll += roll_new;
+    }
 }
