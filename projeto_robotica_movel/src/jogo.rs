@@ -1,6 +1,7 @@
 use crate::astar::Astar;
 use crate::caixa::Caixa;
-use crate::carteiro::{Carteiro, Direcao, Status};
+use crate::carteiro::{Carteiro, Status};
+use std::io;
 use std::process::exit;
 use std::process::Command;
 
@@ -77,13 +78,6 @@ impl Jogo {
             std::process::exit(0);
         }
 
-        let nova_direcao = self.astar_logic.verifica_rota(
-            (self.carteiro.get_pos_x(), self.carteiro.get_pos_y()),
-            (self.destino_x, self.destino_y),
-        );
-
-        println!("O escolhido é: {:?}", nova_direcao);
-
         
 
         // Atualiza local do carteiro e
@@ -132,6 +126,17 @@ impl Jogo {
                         }
                     }
                 }
+
+
+                let nova_direcao = self.astar_logic.verifica_rota(
+                    (self.carteiro.get_pos_x(), self.carteiro.get_pos_y()),
+                    (self.caixa.get_pos_x(), self.caixa.get_pos_y()),
+                );
+        
+                self.carteiro.muda_direcao(nova_direcao);
+                self.carteiro.andar();
+
+
             }
 
             Status::jogando_com_caixa => {
@@ -152,6 +157,16 @@ impl Jogo {
                         }
                     }
                 }
+
+
+
+                let nova_direcao = self.astar_logic.verifica_rota(
+                    (self.carteiro.get_pos_x(), self.carteiro.get_pos_y()),
+                    (self.destino_x, self.destino_y),
+                );
+        
+                self.carteiro.muda_direcao(nova_direcao);
+                self.carteiro.andar();
             }
 
             Status::fim => {
@@ -161,6 +176,8 @@ impl Jogo {
                 exit(0);
             }
         }
+
+        
     }
 
     pub fn joga(&mut self) {
@@ -168,6 +185,9 @@ impl Jogo {
         loop {
             self.update();
             self.imprime_mapa();
+
+            let mut _a = String::new();
+            io::stdin().read_line(&mut _a); //apertar enter pra andar o loop
         }
     }
 }
