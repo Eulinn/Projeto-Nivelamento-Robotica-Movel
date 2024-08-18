@@ -25,6 +25,10 @@ impl Astar {
         }
     }
 
+    pub fn limpa_lixo(&mut self){
+        self.trash = Vec::new();
+    }
+
     pub fn verifica_rota(&mut self, carteiro: (i32, i32), destino: (i32, i32)) -> Direcao{
 
         // essa merda ta é errada ele não anda de X e Y ele anda de Y e X mds vou me matar

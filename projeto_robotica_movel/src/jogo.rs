@@ -104,6 +104,9 @@ impl Jogo {
             && self.carteiro.get_pos_y() == self.caixa.get_pos_y()
         {
             self.carteiro.set_status(Status::jogando_com_caixa);
+
+            
+            self.astar_logic.limpa_lixo();
         }
 
         // Atualiza local da caixa / destino
