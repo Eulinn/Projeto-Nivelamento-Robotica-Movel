@@ -78,8 +78,6 @@ impl Jogo {
             std::process::exit(0);
         }
 
-        
-
         // Atualiza local do carteiro e
         for (i_usize, row) in self.mapa.iter_mut().enumerate() {
             let i = i_usize as i32;
@@ -105,7 +103,6 @@ impl Jogo {
         {
             self.carteiro.set_status(Status::jogando_com_caixa);
 
-            
             self.astar_logic.limpa_lixo();
         }
 
@@ -130,16 +127,12 @@ impl Jogo {
                     }
                 }
 
-
                 let nova_direcao = self.astar_logic.verifica_rota(
                     (self.carteiro.get_pos_x(), self.carteiro.get_pos_y()),
                     (self.caixa.get_pos_x(), self.caixa.get_pos_y()),
                 );
-        
+
                 self.carteiro.muda_direcao(nova_direcao);
-                self.carteiro.andar();
-
-
             }
 
             Status::jogando_com_caixa => {
@@ -161,15 +154,12 @@ impl Jogo {
                     }
                 }
 
-
-
                 let nova_direcao = self.astar_logic.verifica_rota(
                     (self.carteiro.get_pos_x(), self.carteiro.get_pos_y()),
                     (self.destino_x, self.destino_y),
                 );
-        
+
                 self.carteiro.muda_direcao(nova_direcao);
-                self.carteiro.andar();
             }
 
             Status::fim => {
@@ -179,8 +169,11 @@ impl Jogo {
                 exit(0);
             }
         }
-
-        
+        if self.carteiro.verifica_andar() {
+            self.carteiro.andar();
+        }else{
+            println!("ELE NÃO PODE ANDAR");
+        }
     }
 
     pub fn joga(&mut self) {
@@ -189,8 +182,8 @@ impl Jogo {
             self.update();
             self.imprime_mapa();
 
-            let mut _a = String::new();
-            io::stdin().read_line(&mut _a); //apertar enter pra andar o loop
+            // let mut _a = String::new();
+            // io::stdin().read_line(&mut _a); //apertar enter pra andar o loop
         }
     }
 }

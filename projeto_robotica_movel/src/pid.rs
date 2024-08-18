@@ -37,7 +37,7 @@ impl PID {
         self.previous_error = error;
 
 
-        println!("Error: {}, Integral: {}, Derivativa: {}, Output: {}, Delta time: {}", error, self.integral, derivative, (self.kp * error) + (self.ki * self.integral) + (self.kd * derivative), delta_time);
+        // println!("Error: {}, Integral: {}, Derivativa: {}, Output: {}, Delta time: {}", error, self.integral, derivative, (self.kp * error) + (self.ki * self.integral) + (self.kd * derivative), delta_time);
 
         (self.kp * error) + (self.ki * self.integral) + (self.kd * derivative)
     }
